@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 注册bean -->
+	<bean id="arithmeticCalculator" class="com.wsj.spring.aop.impl.xml.ArithmeticCalculatorImpl"></bean>
+	<bean id="loginAspect" class="com.wsj.spring.aop.impl.xml.LoginAspect"></bean>
+	
+	<!-- 配置AOP -->
+	<aop:config>
+		<!-- 配置切点表达式 -->
+		<aop:pointcut expression="execution(* com.wsj.spring.aop.impl.xml.ArithmeticCalculatorImpl.*(..))" id="pointcut"/>
+		<!-- 配置切面 -->
+		<aop:aspect id="login" ref="loginAspect" order="2">
+			<!-- 前置通知 -->
+			<aop:before method="beforeMethod" pointcut-ref="pointcut"/>
+			<!-- 后置通知 -->
+			<aop:after method="afterMethod" pointcut-ref="pointcut"/>
+			<!-- 结束通知 -->
+			<aop:after-returning method="returnMethod" pointcut-ref="pointcut"/>
+			<!-- 异常通知 -->
+			<aop:after-throwing method="exceptionMethod" pointcut-ref="pointcut"/>
+			<!-- 环绕通知 -->
+			<!-- <aop:around method="aroundMethod" pointcut-ref="pointcut"/> -->
+		</aop:aspect>
+	</aop:config>
+</beans>
