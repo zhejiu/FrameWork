@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="ognltest" class="com.wsj.struts2.ognl.OGNLTest" method="execute" >
+			<result name="success">/ognltest.jsp</result>
+		</action>
+		
+		<action name="emp-input" class="com.wsj.struts2.app.Employee" method="input" >
+			<result name="input">/emp-input.jsp</result>
+		</action>
+		
+		<action name="emp-save" class="com.wsj.struts2.app.Employee" method="save" >
+			<result name="save">/emp-save.jsp</result>
+		</action>
+	</package>
+</struts>
